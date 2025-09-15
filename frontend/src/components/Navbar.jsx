@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth"; // <-- new import
+import { useAuth } from "../hooks/useAuth"; // useAuth hook
 
 export default function Navbar() {
   const { user, logout } = useAuth(); // get user info and logout function
@@ -17,7 +17,7 @@ export default function Navbar() {
           <span className="text-xl font-bold text-gray-800">Buyhatke</span>
         </Link>
 
-        {/* Navigation */}
+        {/* Navigation Links */}
         <nav className="hidden md:flex gap-6 text-gray-700 font-medium">
           <NavLink
             to="/"
@@ -53,12 +53,12 @@ export default function Navbar() {
           </NavLink>
         </nav>
 
-        {/* Right Side (Login/Register or Dashboard + Logout) */}
+        {/* Right Side: Login/Register or Dashboard + Logout */}
         <div className="flex items-center gap-4">
           {user ? (
             <>
               <Link
-                to={user.role === "admin" ? "/admin" : "/user"}
+                to={user.role === "admin" ? "/admin" : "/user"} // Role-based dashboard
                 className="px-4 py-2 border border-yellow-500 text-yellow-600 rounded-lg hover:bg-yellow-500 hover:text-white transition"
               >
                 Dashboard
