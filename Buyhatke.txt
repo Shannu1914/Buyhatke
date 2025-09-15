@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 6 — Deployment (short actionable steps)
 Frontend -> Vercel / Netlify
 
@@ -121,3 +122,128 @@ npm i react-router-dom axios react-helmet @stripe/react-stripe-js @stripe/stripe
 npm i -D tailwindcss postcss autoprefixer @vitejs/plugin-react
 npx tailwindcss init -p
 npm run dev
+=======
+6 — Deployment (short actionable steps)
+Frontend -> Vercel / Netlify
+
+Push repo to GitHub.
+
+On Vercel: “New Project” → connect GitHub → select frontend folder (if monorepo set correct build & root).
+
+Build command: npm run build
+
+Output directory: dist
+
+Set environment variable VITE_API_URL=https://your-backend.com/api
+
+Backend -> Render / Railway / Heroku
+
+Create service, connect your repo.
+
+Build: npm install
+
+Start command: npm start (ensure start script runs node server.js in backend folder; you may have to set root to backend in Render)
+
+Set env vars in Render dashboard (MONGO_URI, JWT_SECRET, STRIPE_SECRET_KEY, CLIENT_URL, COOKIE_SECURE=true)
+
+Make sure CLIENT_URL points to deployed frontend domain.
+
+MongoDB Atlas
+
+Configure network access and connection string in Render/Heroku env.
+
+Cookies & CORS in production
+
+In .env: COOKIE_SECURE=true
+
+In server cors config: origin: process.env.CLIENT_URL, credentials: true.
+
+7 — Validation, Security & Hardening
+
+Validation
+
+Backend: use express-validator or Joi for all inputs (auth, products, orders).
+
+Frontend: Formik + Yup for forms (login/register/checkout).
+
+Security
+
+Use helmet() middleware.
+
+Add rate limiting:
+
+import rateLimit from 'express-rate-limit';
+app.use(rateLimit({ windowMs: 15*60*1000, max: 100 }));
+
+
+Sanitize input with xss-clean.
+
+Use bcrypt hashing for passwords. Keep JWT secret long & random.
+
+Store tokens in httpOnly cookies (safer vs localStorage).
+
+Enable HTTPS in production and set secure: true for cookies.
+
+Testing
+
+Backend: Jest + Supertest to test routes.
+
+Frontend: React Testing Library for key components.
+
+8 — SEO & Performance
+
+SEO
+
+Use react-helmet to set title/meta tags for each route.
+
+Add Open Graph and Twitter card meta tags.
+
+Create sitemap.xml and robots.txt.
+
+Add structured data JSON-LD on product pages.
+
+Performance
+
+Serve optimized images (Cloudinary + WebP).
+
+Enable HTTP caching (CDN) for static assets.
+
+Minify and tree-shake (Vite does this).
+
+Lazy-load product images and code-split big bundles.
+
+9 — Extras & Best Practices
+
+Analytics: integrate Google Analytics / Plausible.
+
+Email: use SendGrid / Mailgun for order confirmations.
+
+Admin roles: protect admin endpoints via middleware that checks req.user.role.
+
+Backups: enable automated backups in MongoDB Atlas.
+
+Logging: use morgan for dev, use a cloud logging provider in prod (LogDNA, Papertrail, Datadog).
+
+Monitoring: Sentry for error monitoring.
+
+10 — Quick command summary (copy/paste)
+
+Backend
+
+# from backend/
+npm init -y
+npm i express mongoose dotenv bcryptjs cookie-parser cors jsonwebtoken morgan slugify stripe cloudinary multer express-validator helmet express-rate-limit xss-clean
+npm i -D nodemon
+# Add scripts & create files
+npm run dev
+
+
+Frontend
+
+# from frontend/
+npm create vite@latest . -- --template react
+npm i react-router-dom axios react-helmet @stripe/react-stripe-js @stripe/stripe-js formik yup
+npm i -D tailwindcss postcss autoprefixer @vitejs/plugin-react
+npx tailwindcss init -p
+npm run dev
+>>>>>>> af0fe24 (Initial commit - Buyhatke)

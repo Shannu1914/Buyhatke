@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 .btn { @apply px-4 py-2 rounded border; }
 .btn-primary { @apply bg-black text-white border-black; }
 .container { @apply max-w-6xl mx-auto px-4; }
 
+=======
+.btn { @apply px-4 py-2 rounded border; }
+.btn-primary { @apply bg-black text-white border-black; }
+.container { @apply max-w-6xl mx-auto px-4; }
+
+>>>>>>> af0fe24 (Initial commit - Buyhatke)
