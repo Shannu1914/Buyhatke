@@ -1,7 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../services/api";
-
-const AuthContext = createContext(null);
+import { AuthContext } from "./AuthContext";
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -35,6 +34,3 @@ export default function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
-// ⬇️ remove useAuth from here
-export { AuthContext };
