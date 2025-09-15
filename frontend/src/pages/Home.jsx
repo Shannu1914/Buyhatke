@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { api } from "../services/api";  // ✅ import your API helper
 import ProductCard from "../components/ProductCard";
