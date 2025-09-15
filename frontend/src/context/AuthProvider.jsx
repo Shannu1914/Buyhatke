@@ -1,15 +1,16 @@
+// src/context/AuthProvider.jsx
 import { useEffect, useState } from "react";
+import { AuthContext } from "./AuthContext";
 import { api } from "../services/api";
-import { AuthContext } from "./AuthContext"; 
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    api("/auth/me")
+    api("/auth/me", { auth: true })
       .then((d) => setUser(d.user))
-      .catch(() => setUser(null))
+      .catch(() => {})
       .finally(() => setReady(true));
   }, []);
 
@@ -34,5 +35,3 @@ export default function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
-export { AuthContext };
